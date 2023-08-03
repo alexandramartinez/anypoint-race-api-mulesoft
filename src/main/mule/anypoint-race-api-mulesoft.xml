@@ -8,7 +8,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<flow name="anypoint-race-api-mulesoftFlow2" doc:id="97dba902-b70a-437f-a3e9-08bda7828aad" >
 		<scheduler doc:name="Scheduler" doc:id="2ab6022c-3a2f-4877-b2e8-e255ad54e339" >
 			<scheduling-strategy >
-				<fixed-frequency/>
+				<fixed-frequency frequency="${frequency.ms}"/>
 			</scheduling-strategy>
 		</scheduler>
 		<http:request method="POST" doc:name="Start" doc:id="90a0ed32-93b1-4828-99fd-014e69d27a26" config-ref="HTTP_Request_configuration" path="#[&quot;/api/racers/$(Mule::p('racerId'))/start&quot;]">
