@@ -1,9 +1,13 @@
 # Anypoint Race API (MuleSoft)
 
-Anypoint Race API running with MuleSoft deployed in CloudHub 2.0. 
+Anypoint Race API running with MuleSoft deployed in CloudHub to run the [Anypoint Race](https://www.integration.quest/anypointspeedway) Season 2. 
 
-Postman CLI/GitHub Actions repo can be found at [alexandramartinez/anypoint-race-api-postman](https://github.com/alexandramartinez/anypoint-race-api-postman).
+(`YOUR RACE CLIENT` from the diagram below)
 
-Link to the race portal created by [Ryan Hoegg](https://www.linkedin.com/in/ryanhoegg/): https://anypoint.mulesoft.com/exchange/portals/anypoint-speedway
+![](/images/diagram.png)
 
-Ryan's GitHub repo: [rhoegg/anypoint-race-api](https://github.com/rhoegg/anypoint-race-api)
+- [Race portal](https://anypoint.mulesoft.com/exchange/portals/anypoint-speedway)
+
+- [Anypoint Race API GitHub repo](https://github.com/rhoegg/anypoint-race-api)
+
+Anypoint Race was created by Ryan Hoegg! Thanku ryan ~
