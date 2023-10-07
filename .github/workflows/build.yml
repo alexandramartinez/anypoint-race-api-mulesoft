@@ -61,5 +61,5 @@ jobs:
            -Dconnectedapp.client.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}" \
            -Drace.client.id="${{ secrets.ANYPOINT_RACE_CLIENT_ID }}" \
            -Drace.client.secret="${{ secrets.ANYPOINT_RACE_CLIENT_SECRET }}" \
-           -Denv.id="${{ secrets.ENVID }}"
+           -Denv.id="${{ secrets.ENVID }}" \
            -Dorg.id="${{ secrets.ORGID }}"
