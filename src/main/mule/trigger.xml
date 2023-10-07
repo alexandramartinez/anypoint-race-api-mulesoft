@@ -4,18 +4,12 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
 	http://www.mulesoft.org/schema/mule/anypoint-mq http://www.mulesoft.org/schema/mule/anypoint-mq/current/mule-anypoint-mq.xsd">
-	<flow name="anypoint-race-api-mulesoftFlow2" doc:id="97dba902-b70a-437f-a3e9-08bda7828aad">
-		<!-- <scheduler doc:name="Scheduler" doc:id="2ab6022c-3a2f-4877-b2e8-e255ad54e339">
+	<flow name="trigger">
+		<scheduler doc:name="Scheduler" doc:id="2ab6022c-3a2f-4877-b2e8-e255ad54e339">
 			<scheduling-strategy>
 				<fixed-frequency frequency="${frequency.ms}" />
 			</scheduling-strategy>
-		</scheduler> -->
-		<anypoint-mq:subscriber destination="${anypointmq.queue}" config-ref="race-mq" doc:name="Subscriber" doc:id="wrzpfx" />
-		<ee:transform doc:name="Save queuePayload" doc:id="yyfvxj">
-			<ee:variables>
-				<ee:set-variable variableName="queuePayload">#[payload]</ee:set-variable>
-			</ee:variables>
-		</ee:transform>
+		</scheduler>
 		<http:request method="POST" doc:name="Start" doc:id="90a0ed32-93b1-4828-99fd-014e69d27a26" config-ref="HTTP_Request_configuration" path="#[&quot;/api/racers/$(Mule::p('racerId'))/start&quot;]">
 			<http:body>
 				<![CDATA[#[output application/json
@@ -33,21 +27,5 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 }]]]>
 			</http:headers>
 		</http:request>
-		<!-- <anypoint-mq:consume destination="${anypointmq.queue}" config-ref="race-mq" doc:name="Consume" doc:id="ezbnpd" /> -->
-		<http:request method="POST" doc:name="Finish" doc:id="001860a0-bf01-4ff7-8d59-6538a88c3067" config-ref="HTTP_Request_configuration" path="#[&quot;/api/racers/$(Mule::p('racerId'))/races/$(vars.queuePayload.raceId)/finish&quot;]">
-			<http:body>
-				<![CDATA[#[output text/plain --- vars.queuePayload.token default ""]]]>
-			</http:body>
-			<http:headers>
-				<![CDATA[#[output application/java
----
-{
-	"client_secret" : Mule::p('client_secret'),
-	"client_id" : Mule::p('client_id')
-}]]]>
-			</http:headers>
-		</http:request>
-		<logger doc:name="Logger" doc:id="echkax" message="Finished"/>
-		<logger level="INFO" doc:name="Logger" doc:id="6e9b9cb3-bb24-48a9-b218-4ba22b6d60f6" message="#[payload]" />
 	</flow>
 </mule>
