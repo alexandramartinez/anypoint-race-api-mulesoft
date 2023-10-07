@@ -5,11 +5,17 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
 	http://www.mulesoft.org/schema/mule/anypoint-mq http://www.mulesoft.org/schema/mule/anypoint-mq/current/mule-anypoint-mq.xsd">
 	<flow name="anypoint-race-api-mulesoftFlow2" doc:id="97dba902-b70a-437f-a3e9-08bda7828aad">
-		<scheduler doc:name="Scheduler" doc:id="2ab6022c-3a2f-4877-b2e8-e255ad54e339">
+		<!-- <scheduler doc:name="Scheduler" doc:id="2ab6022c-3a2f-4877-b2e8-e255ad54e339">
 			<scheduling-strategy>
 				<fixed-frequency frequency="${frequency.ms}" />
 			</scheduling-strategy>
-		</scheduler>
+		</scheduler> -->
+		<anypoint-mq:subscriber destination="${anypointmq.queue}" config-ref="race-mq" doc:name="Subscriber" doc:id="wrzpfx" />
+		<ee:transform doc:name="Save queuePayload" doc:id="yyfvxj">
+			<ee:variables>
+				<ee:set-variable variableName="queuePayload">#[payload]</ee:set-variable>
+			</ee:variables>
+		</ee:transform>
 		<http:request method="POST" doc:name="Start" doc:id="90a0ed32-93b1-4828-99fd-014e69d27a26" config-ref="HTTP_Request_configuration" path="#[&quot;/api/racers/$(Mule::p('racerId'))/start&quot;]">
 			<http:body>
 				<![CDATA[#[output application/json
@@ -27,15 +33,10 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 }]]]>
 			</http:headers>
 		</http:request>
-		<ee:transform doc:name="Get raceId" doc:id="yyfvxj">
-			<ee:variables>
-				<ee:set-variable variableName="raceId">#[payload.raceId]</ee:set-variable>
-			</ee:variables>
-		</ee:transform>
-		<anypoint-mq:consume destination="${anypointmq.queue}" config-ref="race-mq" doc:name="Consume" doc:id="ezbnpd" />
-		<http:request method="POST" doc:name="Finish" doc:id="001860a0-bf01-4ff7-8d59-6538a88c3067" config-ref="HTTP_Request_configuration" path="#[&quot;/api/racers/$(Mule::p('racerId'))/races/$(vars.raceId)/finish&quot;]">
+		<!-- <anypoint-mq:consume destination="${anypointmq.queue}" config-ref="race-mq" doc:name="Consume" doc:id="ezbnpd" /> -->
+		<http:request method="POST" doc:name="Finish" doc:id="001860a0-bf01-4ff7-8d59-6538a88c3067" config-ref="HTTP_Request_configuration" path="#[&quot;/api/racers/$(Mule::p('racerId'))/races/$(vars.queuePayload.raceId)/finish&quot;]">
 			<http:body>
-				<![CDATA[#[output text/plain --- payload default ""]]]>
+				<![CDATA[#[output text/plain --- vars.queuePayload.token default ""]]]>
 			</http:body>
 			<http:headers>
 				<![CDATA[#[output application/java

@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    
+
     <groupId>com.mycompany</groupId>
     <artifactId>anypoint-race-api-mulesoft</artifactId>
-    <version>1.0.2</version>
+    <version>2.0.0</version>
     <packaging>mule-application</packaging>
-    
+
     <name>anypoint-race-api-mulesoft</name>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        
+
         <app.runtime>4.4.0-20230320</app.runtime>
         <mule.maven.plugin.version>3.8.2</mule.maven.plugin.version>
     </properties>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -29,10 +31,33 @@
                 <artifactId>mule-maven-plugin</artifactId>
                 <version>${mule.maven.plugin.version}</version>
                 <extensions>true</extensions>
+                <configuration>
+                    <cloudHubDeployment>
+                        <uri>https://anypoint.mulesoft.com</uri>
+                        <muleVersion>4.4.0</muleVersion>
+                        <applicationName>anypoint-race-api-mulesoft</applicationName>
+                        <environment>Sandbox</environment>
+                        <workerType>MICRO</workerType>
+                        <region>us-east-1</region>
+                        <workers>1</workers>
+                        <objectStoreV2>false</objectStoreV2>
+                        <connectedAppClientId>${connectedapp.client.id}</connectedAppClientId>
+                        <connectedAppClientSecret>${connectedapp.client.secret}</connectedAppClientSecret>
+                        <connectedAppGrantType>client_credentials</connectedAppGrantType>
+                        <properties>
+                            <anypointmq.clientId>${connectedapp.client.id}</anypointmq.clientId>
+                            <anypointmq.clientSecret>${connectedapp.client.secret}</anypointmq.clientSecret>
+                            <client_id>${race.client.id}</client_id>
+                            <client_secret>${race.client.secret}</client_secret>
+                            <anypointmq.orgId>${org.id}</anypointmq.orgId>
+                            <anypointmq.envId>${env.id}</anypointmq.envId>
+                        </properties>
+                    </cloudHubDeployment>
+                </configuration>
             </plugin>
         </plugins>
     </build>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.mule.connectors</groupId>
@@ -53,7 +78,7 @@
             <classifier>mule-plugin</classifier>
         </dependency>
     </dependencies>
-    
+
     <repositories>
         <repository>
             <id>anypoint-exchange-v3</id>
@@ -68,7 +93,7 @@
             <layout>default</layout>
         </repository>
     </repositories>
-    
+
     <pluginRepositories>
         <pluginRepository>
             <id>mulesoft-releases</id>
@@ -80,5 +105,5 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-    
+
 </project>
