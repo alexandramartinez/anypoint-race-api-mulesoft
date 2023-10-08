@@ -21,10 +21,10 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 			</http:headers>
 		</http:request>
 		<logger doc:name="Finished race" doc:id="echkax" message="Finished race" />
-		<logger doc:name="Log payload" doc:id="bajsmd" message="#[payload]"/>
+		<logger doc:name="Log payload" doc:id="bajsmd" message="#[payload]" />
 		<error-handler>
 			<on-error-continue name="Too many requests" type="HTTP:TOO_MANY_REQUESTS">
-				<logger doc:name="Log Error" doc:id="libjcq" message="#['Error: ' ++ (error.description default "null")]" level="ERROR" />
+				<logger doc:name="Log Error" doc:id="libjcq" message="#['Error: ' ++ (error.description default 'null')]" level="ERROR" />
 			</on-error-continue>
 		</error-handler>
 	</flow>
