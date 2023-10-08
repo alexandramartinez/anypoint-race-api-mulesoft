@@ -38,7 +38,7 @@
                         <applicationName>anypoint-race-api-mulesoft</applicationName>
                         <environment>Sandbox</environment>
                         <workerType>MICRO</workerType>
-                        <region>us-east-1</region>
+                        <region>us-east-2</region>
                         <workers>1</workers>
                         <objectStoreV2>true</objectStoreV2>
                         <connectedAppClientId>${connectedapp.client.id}</connectedAppClientId>
