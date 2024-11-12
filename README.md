@@ -11,3 +11,9 @@ Anypoint Race API running with MuleSoft deployed in CloudHub to run the [Anypoin
 - [Anypoint Race API GitHub repo](https://github.com/rhoegg/anypoint-race-api)
 
 Anypoint Race was created by Ryan Hoegg! Thanku ryan ~
+
+## Similar repos
+
+[![](https://github-readme-stats.vercel.app/api/pin/?username=alexandramartinez&repo=anypoint-race-api-postman&theme=codeSTACKr)](https://github.com/alexandramartinez/anypoint-race-api-postman)
+[![](https://github-readme-stats.vercel.app/api/pin/?username=alexandramartinez&repo=anypoint-racer-api&theme=codeSTACKr)](https://github.com/alexandramartinez/anypoint-racer-api)
+[![](https://github-readme-stats.vercel.app/api/pin/?username=alexandramartinez&repo=anypoint-racer-api-s3&theme=codeSTACKr)](https://github.com/alexandramartinez/anypoint-racer-api-s3)
